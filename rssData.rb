@@ -64,7 +64,7 @@ class RssItem
         @Guid=t
     end
     def Guid
-        Guid
+        @Guid
     end
 
     def PubDate=(t)

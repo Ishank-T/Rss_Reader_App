@@ -18,8 +18,8 @@ class RssManager
         if rssChannelNode.at_xpath("link")
             rssChannel.Link = rssChannelNode.at_xpath("link").content
         end
-        if rssChannel.at_xpath("pubDate")
-            rssChannel.PubDate = rssChannel.at_xpath("pubDate").content
+        if rssChannelNode.at_xpath("pubDate")
+            rssChannel.PubDate = rssChannelNode.at_xpath("pubDate").content
         end
         rssChannel.RssItems = LoadRssItemsFromUrl(rssUrl)
 
@@ -30,7 +30,7 @@ class RssManager
 
         xmlDoc = Nokogiri::XML(URI.open(rssUrl))
 
-        rssItemNodes = xmlDoc.root.at_xpath("channel/item")
+        rssItemNodes = xmlDoc.root.xpath("channel/item")
 
         rssItems =[]
 
