@@ -1,3 +1,4 @@
+# Making standard data models present in an Rss file
 class RssChannel
 
     def Title=(t)

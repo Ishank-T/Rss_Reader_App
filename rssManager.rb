@@ -6,10 +6,13 @@ class RssManager
     
     def LoadRssChannelFromUrl(rssUrl)
 
+        #read rss from url using nokogiri library
         xmlDoc = Nokogiri::XML(URI.open(rssUrl))
 
+        # Set rssChannel Node
         rssChannelNode = xmlDoc.root.at_xpath("channel")
 
+        # Create new RssChannel
         rssChannel =  RssChannel.new
         rssChannel.Title = xmlDoc.root.at_xpath("channel/title").content
         if rssChannelNode.at_xpath("description")
@@ -32,10 +35,12 @@ class RssManager
 
         rssItemNodes = xmlDoc.root.xpath("channel/item")
 
+        # Making an arrray to  store rssItems temporarily
         rssItems =[]
 
         for index in 0..rssItemNodes.length-1 do
 
+            # Create new RssItem
             rssItem=RssItem.new
             rssItem.Title = rssItemNodes[index].at_xpath("title").content
             if rssItemNodes[index].at_xpath("description")
@@ -50,6 +55,7 @@ class RssManager
             if rssItemNodes[index].at_xpath("pubDate")
                 rssItem.PubDate = rssItemNodes[index].at_xpath("pubDate").content
             end
+            # Adding RssItem into an array
             rssItems.push(rssItem)
 
         end
